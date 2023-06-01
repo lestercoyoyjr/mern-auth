@@ -1,10 +1,14 @@
 import { useState } from "react";
+import axios from 'axios';
 
 function Register () {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    function registerUser (e){
+        e.preventDefault();
+    }
 
     return(
         <form action="">
