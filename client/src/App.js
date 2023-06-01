@@ -7,13 +7,12 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        <Link to={'/'}>Home</Link> |
         <Link to={'/login'}>Login</Link> |
         <Link to={'/register'}>Register</Link>
       </div>
       <Switch>
-        <Route exact path={'/register'}>
-          <Register/>
-        </Route>
+        <Route exact path={'/register'} component={Register}/>
       </Switch>
       <hr/>
     </BrowserRouter>
