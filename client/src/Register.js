@@ -8,6 +8,9 @@ function Register () {
 
     function registerUser (e){
         e.preventDefault();
+
+        // a request to API
+        axios.post('',);
     }
 
     return(
