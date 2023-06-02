@@ -10,7 +10,9 @@ function Register () {
         e.preventDefault();
 
         // a request to API
-        axios.post('',);
+        const data = {email,password};
+        axios.post('http://localhost:4000/register', data, {withCredentials:true})
+        .then(() => {});
     }
 
     return(
