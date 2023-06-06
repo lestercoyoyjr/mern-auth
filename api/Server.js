@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 import User from "./models/User.js";
 import bcrypt from 'bcrypt';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+
+const secret = 'secret123';
 
 dotenv.config();
 const app = express();
@@ -32,8 +35,14 @@ app.post('/register', (req,res) => {
     const hashedPassword = bcrypt.hashSync(password, 10);
     const user = new User({password:hashedPassword, email});
     user.save().then(userinfo => {
-        console.log(userinfo);
-        res.send('');
+        jwt.sign({id:userinfo._id, email:userinfo.email}, secret, (err,token) => {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            } else {
+                res.cookie('token', token).json({id:userinfo._id, email:userinfo.email});
+            }
+        });
     })
 })
 
