@@ -16,7 +16,7 @@ function Register () {
     }
 
     return(
-        <form action="">
+        <form action="" onSubmit={e => registerUser(e)}>
             <input type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/><br/>
             <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)}/><br/>
             <button type="submit">register</button>
