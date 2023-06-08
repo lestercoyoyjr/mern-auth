@@ -54,4 +54,23 @@ app.post('/register', (req,res) => {
     })
 })
 
+app.post('/login', (req,res) => {
+    const {email, password} = req.body;
+    User.findOne({email})
+    .then(userinfo => {
+        // compare passwords
+        const passOk = bcrypt.compareSync(password, userinfo.password);
+        if(passOk){
+            jwt.sign({id:userinfo._id, email}, secret, (err,token) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(500);
+                } else {
+                    res.cookie('token', token).json({id:userinfo._id, email:userinfo.email})
+                }
+            });
+        }
+    })
+})
+
 app.listen(4000);

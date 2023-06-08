@@ -5,6 +5,7 @@ import "./App.css";
 import Register from "./Register";
 import UserContext from "./UserContext";
 import axios from "axios";
+import Login from "./Login";
 
 function App() {
   const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ function App() {
         </div>
         <Switch>
           <Route exact path={"/register"} component={Register} />
+          <Route exact path={"/login"} component={Login} />
         </Switch>
         <hr />
       </BrowserRouter>
