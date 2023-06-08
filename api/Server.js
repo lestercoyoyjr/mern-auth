@@ -69,6 +69,8 @@ app.post('/login', (req,res) => {
                     res.cookie('token', token).json({id:userinfo._id, email:userinfo.email});
                 }
             });
+        } else {
+            res.sendStatus(401);
         }
     })
 })
