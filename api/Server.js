@@ -30,6 +30,14 @@ app.get('/', (req,res) => {
     res.send('ok');
 })
 
+app.get('/user', (req,res) => {
+    const payload = jwt.verify(req.cookies.token, secret);
+    User.findById(payload.id)
+    .then(userinfo => {
+        res.json(userinfo);
+    });
+})
+
 app.post('/register', (req,res) => {
     const {email,password} = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
