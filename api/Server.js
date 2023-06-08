@@ -61,12 +61,12 @@ app.post('/login', (req,res) => {
         // compare passwords
         const passOk = bcrypt.compareSync(password, userinfo.password);
         if(passOk){
-            jwt.sign({id:userinfo._id, email}, secret, (err,token) => {
+            jwt.sign({id:userinfo._id, email:userinfo.email}, secret, (err,token) => {
                 if (err) {
                     console.log(err);
                     res.sendStatus(500);
                 } else {
-                    res.cookie('token', token).json({id:userinfo._id, email:userinfo.email})
+                    res.cookie('token', token).json({id:userinfo._id, email:userinfo.email});
                 }
             });
         }
