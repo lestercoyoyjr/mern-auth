@@ -34,7 +34,7 @@ app.get('/user', (req,res) => {
     const payload = jwt.verify(req.cookies.token, secret);
     User.findById(payload.id)
     .then(userinfo => {
-        res.json(userinfo);
+        res.json({id:userinfo._id, email:userinfo.email});
     });
 })
 

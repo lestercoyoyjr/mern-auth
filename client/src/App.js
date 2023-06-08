@@ -10,7 +10,10 @@ function App() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/user', {withCredentials:true});
+    axios.get('http://localhost:4000/user', {withCredentials:true})
+    .then(response => {
+      setEmail(response.data.email);
+    });
   }, []);
 
   return (
