@@ -79,4 +79,37 @@ app.post('/logout', (req,res) => {
     res.cookie('token', '').send();
 })
 
+// todo APIs
+app.get('/todos', (req,res) => {
+    const payload = jwt.verify(req.cookies.token, secret);
+    Todo.where({user:new mongoose.Types.ObjectId(payload.id)})
+      .find((err,todos) => {
+        res.json(todos);
+      })
+  });
+  
+  app.put('/todos', (req, res) => {
+    const payload = jwt.verify(req.cookies.token, secret);
+    const todo = new Todo({
+      text:req.body.text,
+      done:false,
+      user:new mongoose.Types.ObjectId(payload.id),
+    });
+    todo.save().then(todo => {
+      res.json(todo);
+    })
+  });
+  
+  app.post('/todos', (req,res) => {
+    const payload = jwt.verify(req.cookies.token, secret);
+    Todo.updateOne({
+      _id:new mongoose.Types.ObjectId(req.body.id),
+      user:new mongoose.Types.ObjectId(payload.id)
+    }, {
+      done:req.body.done,
+    }).then(() => {
+      res.sendStatus(200);
+    });
+  });
+
 app.listen(4000);
