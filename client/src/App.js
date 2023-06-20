@@ -22,34 +22,31 @@ function Logout() {
   .then(() => setEmail(''));
 }
 
-  return (
-    <UserContext.Provider value={{email, setEmail}}>
-      <BrowserRouter>
-        <div>
-          {!!email && (
-            <div>
-              Logged in as {email}
-              <button onClick={() => Logout()}>Log out</button>
-            </div>
-          )}
-          {!email && (
-            <div>Not logged in</div>
-          )}
-        </div>
-        <hr/>
-        <div>
-          <Link to={"/"}>Home</Link> |
-          <Link to={"/login"}>Login</Link> |
-          <Link to={"/register"}>Register</Link>
-        </div>
+return (
+  <UserContext.Provider value={{email,setEmail}}>
+    <BrowserRouter>
+      <nav>
+        <Link to={'/'}>Home</Link>
+        {!email && (
+          <>
+            <Link to={'/login'}>Login</Link>
+            <Link to={'/register'}>Register</Link>
+          </>
+        )}
+        {!!email && (
+          <a onClick={e => {e.preventDefault();logout();}}>Logout</a>
+        )}
+      </nav>
+      <main>
         <Switch>
-          <Route exact path={"/register"} component={Register} />
-          <Route exact path={"/login"} component={Login} />
+          <Route exact path={'/'} component={Home} />
+          <Route exact path={'/register'} component={Register} />
+          <Route exact path={'/login'} component={Login} />
         </Switch>
-        <hr />
-      </BrowserRouter>
-    </UserContext.Provider>
-  );
+      </main>
+    </BrowserRouter>
+  </UserContext.Provider>
+);
 }
 
 export default App;

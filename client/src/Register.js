@@ -6,6 +6,7 @@ function Register () {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect,setRedirect] = useState(false);
 
     const user = useContext(UserContext);
 
@@ -18,8 +19,13 @@ function Register () {
         .then(response => {
             user.setEmail(response.data.email);
             setEmail('');
-            setPassword('');  
+            setPassword('');
+            setRedirect(true);  
         });
+    }
+
+    if (redirect) {
+        return <Redirect to={'/'} />
     }
 
     return(
