@@ -7,6 +7,7 @@ import User from "./models/User.js";
 import bcrypt from 'bcrypt';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import Todo from "./models/Todo.js";
 
 const secret = 'secret123';
 
